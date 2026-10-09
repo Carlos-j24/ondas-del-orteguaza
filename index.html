@@ -1,0 +1,1634 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Ondas del Orteguaza — Radio cristiana en vivo | Florencia, Caquetá</title>
+<meta name="description" content="Escucha Ondas del Orteguaza en vivo: predicaciones, alabanza y compañía desde Florencia, Caquetá. La radio que bendice tu vida.">
+<meta name="theme-color" content="#0B2A5B">
+<link rel="canonical" href="https://ondas-del-orteguaza.netlify.app/">
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_CO">
+<meta property="og:site_name" content="Ondas del Orteguaza">
+<meta property="og:title" content="Ondas del Orteguaza — La radio que bendice tu vida">
+<meta property="og:description" content="Predicaciones, alabanza y compañía en vivo desde Florencia, Caquetá. Escucha ahora.">
+<meta property="og:url" content="https://ondas-del-orteguaza.netlify.app/">
+<meta property="og:image" content="https://ondas-del-orteguaza.netlify.app/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Ondas del Orteguaza — La radio que bendice tu vida">
+<meta name="twitter:description" content="Predicaciones, alabanza y compañía en vivo desde Florencia, Caquetá.">
+<meta name="twitter:image" content="https://ondas-del-orteguaza.netlify.app/og-image.png">
+
+<link rel="icon" href="icon-192.png" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Ondas del Orteguaza">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,500&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --forest:#0B2A5B;
+    --forest-deep:#071B3D;
+    --river:#2F73C6;
+    --gold:#E8A33D;
+    --cream:#F5F7FA;
+    --soil:#152238;
+    --leaf:#5C8FCE;
+    --line: rgba(245,247,250,0.18);
+    --muted:#3E5A85;
+    --muted-soft:#5b6b85;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--cream);
+    color:var(--soil);
+    font-family:'Work Sans', sans-serif;
+    line-height:1.5;
+  }
+  h1,h2,h3{
+    font-family:'Source Serif 4', serif;
+    font-weight:700;
+    line-height:1.1;
+  }
+  a{color:inherit;}
+  img,svg{display:block; max-width:100%;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    background:linear-gradient(180deg, var(--forest) 0%, var(--forest-deep) 100%);
+    color:var(--cream);
+    position:relative;
+    padding:28px 6vw 0;
+    padding-top:calc(28px + env(safe-area-inset-top,0px));
+  }
+  .hero-wave{
+    position:absolute; bottom:-2px; left:0; width:100%;
+    overflow:hidden; line-height:0; pointer-events:none; z-index:1;
+  }
+  .nav{
+    display:flex; justify-content:space-between; align-items:center;
+    padding-bottom:36px;
+    position:relative; z-index:2;
+  }
+  .brand{
+    display:flex; align-items:center; gap:12px;
+    font-family:'Source Serif 4', serif; font-weight:700; font-size:1.15rem;
+  }
+  .brand-logo{height:44px; width:auto;}
+  .nav-toggle{
+    display:none;
+    width:44px; height:44px;
+    border:1px solid var(--line);
+    border-radius:6px;
+    background:transparent;
+    color:var(--cream);
+    cursor:pointer;
+    align-items:center; justify-content:center;
+    position:relative; z-index:220;
+  }
+  .nav-toggle:hover{background:rgba(245,247,250,0.08);}
+  .nav-toggle-eq{
+    display:flex; align-items:flex-end; gap:3px; height:18px;
+  }
+  .nav-toggle-eq span{
+    display:block; width:3px; background:var(--gold); border-radius:1px;
+  }
+  .nav-toggle-eq span:nth-child(1){height:7px;}
+  .nav-toggle-eq span:nth-child(2){height:16px;}
+  .nav-toggle-eq span:nth-child(3){height:11px;}
+  .nav-toggle-eq span:nth-child(4){height:14px;}
+  .nav-backdrop{
+    display:none;
+    position:fixed; inset:0; z-index:200;
+    background:rgba(7,27,61,0.55);
+  }
+  .nav-backdrop.open{display:block;}
+  .nav-links{display:flex; align-items:center;}
+  .nav-panel-header, .nav-panel-footer{display:none;}
+  .nav-panel-list{display:flex; gap:28px; font-size:0.95rem; list-style:none; margin:0; padding:0;}
+  .nav-panel-list a{opacity:0.85; text-decoration:none; transition:opacity .2s; color:inherit;}
+  .nav-panel-list a:hover{opacity:1;}
+  body.nav-open{overflow:hidden;}
+
+  .hero-body{
+    display:grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap:40px;
+    align-items:end;
+    padding-bottom:80px;
+    position:relative; z-index:2;
+  }
+  .hero-eyebrow{
+    color:var(--gold);
+    font-size:0.95rem;
+    margin-bottom:14px;
+  }
+  .hero h1{
+    font-size:clamp(1.9rem, 4.2vw, 3rem);
+    max-width:19ch;
+    margin-bottom:20px;
+  }
+  .hero p{
+    max-width:42ch;
+    font-size:1.05rem;
+    color:rgba(245,239,225,0.85);
+  }
+
+  .player-card{
+    background:rgba(245,239,225,0.06);
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:26px;
+    backdrop-filter:blur(6px);
+  }
+  .player-status{
+    display:flex; align-items:center; gap:8px;
+    font-size:0.85rem; letter-spacing:0.02em;
+    color:var(--gold);
+    margin-bottom:6px;
+  }
+  .dot{
+    width:8px; height:8px; border-radius:50%;
+    background:var(--gold);
+    animation:pulse 1.8s infinite ease-in-out;
+  }
+  @keyframes pulse{
+    0%,100%{opacity:1;}
+    50%{opacity:0.35;}
+  }
+  .player-title{font-size:1.15rem; font-weight:600; margin-bottom:2px;}
+  .player-sub{font-size:0.88rem; color:rgba(245,239,225,0.6); margin-bottom:20px;}
+  .player-controls{display:flex; align-items:center; gap:16px;}
+  .play-btn{
+    width:56px; height:56px; border-radius:50%;
+    background:var(--gold);
+    border:none; cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    flex-shrink:0;
+    transition:transform .15s ease, opacity .15s ease;
+  }
+  .play-btn:hover{transform:scale(1.05);}
+  .play-btn:disabled{opacity:0.55; cursor:wait; transform:none;}
+  .play-btn svg{width:20px; height:20px; fill:var(--forest-deep);}
+  .volume-row{flex:1;}
+  .volume-row label{display:block; font-size:0.78rem; color:rgba(245,239,225,0.55); margin-bottom:6px;}
+  input[type=range]{width:100%; accent-color:var(--gold);}
+
+  .river{
+    display:block; width:100%; height:100px;
+  }
+
+  /* ---------- SECTION SHARED ---------- */
+  section{padding:76px 6vw;}
+  .section-head{
+    display:flex; justify-content:space-between; align-items:flex-end;
+    margin-bottom:40px; gap:24px; flex-wrap:wrap;
+  }
+  .section-eyebrow{color:var(--river); font-weight:600; font-size:0.9rem; margin-bottom:8px;}
+  .section-head h2{font-size:clamp(1.7rem,3vw,2.3rem);}
+  .section-note{max-width:36ch; font-size:0.95rem; color:var(--muted);}
+
+  /* ---------- VERSÍCULO ---------- */
+  .verse-section{background:var(--cream); padding-top:56px; padding-bottom:0;}
+  .verse-box{
+    max-width:720px; margin:0 auto; text-align:center;
+    border:1px solid rgba(11,42,91,0.12);
+    border-left:4px solid var(--gold);
+    border-radius:6px;
+    padding:32px 28px;
+    background:#fff;
+  }
+  .verse-label{
+    color:var(--river); font-weight:600; font-size:0.85rem;
+    letter-spacing:0.03em; margin-bottom:14px;
+  }
+  .verse-text{
+    font-family:'Source Serif 4', serif;
+    font-size:1.25rem; font-style:italic;
+    color:var(--forest); line-height:1.5; margin-bottom:10px;
+  }
+  .verse-ref{color:var(--muted-soft); font-weight:600; font-size:0.9rem;}
+
+  /* ---------- SHARE ---------- */
+  .share-section{padding-top:32px; padding-bottom:0; text-align:center;}
+  .share-btn{
+    display:inline-flex; align-items:center; gap:10px;
+    background:#25D366; color:#fff;
+    padding:12px 22px; border-radius:100px;
+    text-decoration:none; font-size:0.95rem; font-weight:600;
+  }
+
+  /* ---------- PARRILLA ---------- */
+  .schedule{
+    background:var(--forest);
+    color:var(--cream);
+  }
+  .schedule .section-eyebrow{color:var(--gold);}
+  .schedule .section-note{color:rgba(245,239,225,0.6);}
+  .grid-days{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(220px,1fr));
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  .day-col{background:var(--forest); padding:22px 20px; position:relative;}
+  .day-col.is-today{
+    background:linear-gradient(180deg, rgba(232,163,61,0.14) 0%, var(--forest) 100%);
+    box-shadow:inset 0 0 0 1px rgba(232,163,61,0.45);
+  }
+  .day-col h3{
+    font-size:1rem; font-family:'Work Sans',sans-serif; font-weight:600;
+    color:var(--gold); margin-bottom:16px; padding-bottom:10px;
+    border-bottom:1px solid var(--line);
+    display:flex; align-items:center; justify-content:space-between; gap:8px;
+  }
+  .day-badge{
+    font-size:0.68rem; font-weight:700; letter-spacing:0.04em;
+    text-transform:uppercase; color:var(--forest-deep);
+    background:var(--gold); padding:3px 8px; border-radius:4px;
+    white-space:nowrap;
+  }
+  .slot{
+    padding:9px 0; font-size:0.9rem;
+    display:flex; justify-content:space-between; gap:10px;
+    border-bottom:1px dashed rgba(245,239,225,0.1);
+  }
+  .slot:last-child{border-bottom:none;}
+  .slot.is-now{
+    color:var(--gold);
+    font-weight:600;
+    background:rgba(232,163,61,0.1);
+    margin:0 -8px;
+    padding-left:8px; padding-right:8px;
+    border-radius:4px;
+    border-bottom-color:transparent;
+  }
+  .slot.is-now time{color:rgba(232,163,61,0.85);}
+  .slot time{color:rgba(245,239,225,0.55); font-size:0.82rem; white-space:nowrap;}
+  .schedule-footnote{
+    color:rgba(245,239,225,0.5); font-size:0.85rem; margin-top:20px;
+  }
+  .content-loading{
+    opacity:0.65; font-size:0.95rem; padding:12px 0;
+  }
+
+  /* ---------- ACTIVIDADES ---------- */
+  .events-list{display:flex; flex-direction:column;}
+  .event-row{
+    display:grid;
+    grid-template-columns:110px 1fr auto;
+    gap:24px;
+    align-items:center;
+    padding:22px 0;
+    border-top:1px solid rgba(42,32,22,0.15);
+  }
+  .events-list .event-row:last-child{border-bottom:1px solid rgba(42,32,22,0.15);}
+  .event-date{font-family:'Source Serif 4', serif;}
+  .event-date .num{font-size:1.9rem; font-weight:700; display:block; line-height:1;}
+  .event-date .mon{font-size:0.8rem; color:var(--river); font-weight:600;}
+  .event-info h3{font-size:1.15rem; margin-bottom:4px;}
+  .event-info p{font-size:0.9rem; color:var(--muted);}
+  .event-tag{
+    font-size:0.78rem; padding:6px 14px; border:1px solid var(--river); color:var(--river);
+    border-radius:100px; white-space:nowrap; height:fit-content;
+  }
+
+  /* ---------- ORACIÓN ---------- */
+  .prayer{
+    background:linear-gradient(180deg, #EEF2F7 0%, var(--cream) 100%);
+  }
+  .prayer-layout{
+    display:grid;
+    grid-template-columns:1fr 1.1fr;
+    gap:48px;
+    align-items:start;
+  }
+  .prayer-copy h2{font-size:clamp(1.7rem,3vw,2.3rem); margin-bottom:14px; color:var(--forest);}
+  .prayer-copy p{max-width:36ch; color:var(--muted); font-size:1rem;}
+  .prayer-form{
+    display:flex; flex-direction:column; gap:14px;
+  }
+  .prayer-form label{
+    display:block; font-size:0.82rem; font-weight:600;
+    color:var(--forest); margin-bottom:6px;
+  }
+  .prayer-form label .optional{font-weight:400; color:var(--muted-soft);}
+  .prayer-form input,
+  .prayer-form textarea{
+    width:100%;
+    border:1px solid rgba(11,42,91,0.18);
+    border-radius:6px;
+    background:#fff;
+    padding:12px 14px;
+    font:inherit;
+    color:var(--soil);
+    transition:border-color .15s ease, box-shadow .15s ease;
+  }
+  .prayer-form input:focus,
+  .prayer-form textarea:focus{
+    outline:none;
+    border-color:var(--river);
+    box-shadow:0 0 0 3px rgba(47,115,198,0.15);
+  }
+  .prayer-form textarea{min-height:120px; resize:vertical;}
+  .prayer-submit{
+    align-self:flex-start;
+    border:none; cursor:pointer;
+    background:var(--forest); color:var(--cream);
+    padding:13px 22px; border-radius:6px;
+    font:inherit; font-weight:600; font-size:0.95rem;
+    transition:background .15s ease, transform .15s ease;
+  }
+  .prayer-submit:hover{background:var(--forest-deep); transform:translateY(-1px);}
+  .prayer-submit:disabled{opacity:0.7; cursor:default; transform:none;}
+  .prayer-note{font-size:0.88rem; color:#B23A2E; font-weight:600;}
+  .prayer-note:empty{display:none;}
+  .prayer-hp{position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden;}
+  .prayer-consent{display:flex !important; gap:10px; align-items:flex-start; font-weight:400 !important; color:var(--muted) !important; font-size:0.85rem !important; line-height:1.45;}
+  .prayer-consent input{width:18px !important; height:18px; padding:0 !important; margin-top:2px; flex-shrink:0; accent-color:var(--forest);}
+  .prayer-consent a{color:var(--river);}
+  .prayer-success{
+    display:none;
+    border-left:4px solid var(--gold);
+    background:#fff;
+    border-radius:6px;
+    padding:22px 24px;
+    color:var(--forest);
+  }
+  .prayer-success.is-visible{display:block;}
+  .prayer-success h3{
+    font-size:1.2rem; margin-bottom:8px;
+  }
+  .prayer-success p{color:var(--muted); font-size:0.95rem;}
+  .prayer-form.is-hidden{display:none;}
+
+  /* ---------- APP CTA ---------- */
+  .app-cta{
+    background:var(--gold);
+    color:var(--forest-deep);
+    display:grid; grid-template-columns:1.3fr 0.7fr; gap:40px; align-items:center;
+  }
+  .app-cta .section-eyebrow{color:var(--forest-deep);}
+  .app-cta h2{font-size:clamp(1.7rem,3.4vw,2.5rem); margin-bottom:14px;}
+  .app-cta p{max-width:38ch; margin-bottom:26px; font-size:1rem;}
+  .store-btn{
+    display:inline-flex; align-items:center; gap:10px;
+    background:var(--forest-deep); color:var(--cream);
+    padding:13px 22px; border-radius:6px; text-decoration:none;
+    font-size:0.95rem; font-weight:500;
+  }
+  .ios-steps{margin:0 0 0 20px; display:flex; flex-direction:column; gap:8px; font-size:0.98rem; max-width:38ch;}
+  .ios-steps[hidden], .store-btn[hidden], .app-cta[hidden]{display:none;}
+  .app-phone{
+    justify-self:center;
+    width:180px; height:340px;
+    border:3px solid var(--forest-deep);
+    border-radius:26px;
+    background:var(--cream);
+    display:flex; align-items:center; justify-content:center;
+    padding:20px;
+  }
+  .app-phone img{width:100%; height:auto;}
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    background:var(--forest-deep); color:rgba(245,239,225,0.65);
+    padding:40px 6vw; display:flex; justify-content:space-between; align-items:flex-start;
+    font-size:0.85rem; flex-wrap:wrap; gap:24px;
+  }
+  footer .brand{color:var(--cream);}
+  .affiliation{display:flex; flex-direction:column; align-items:center; gap:10px;}
+  .affiliation-label{font-size:0.82rem; color:rgba(245,239,225,0.6);}
+  .affiliation-logo{
+    width:64px; height:64px; border-radius:50%; overflow:hidden;
+    border:2px solid var(--gold);
+  }
+  .affiliation-logo img{width:100%; height:100%; object-fit:cover;}
+  .social{display:flex; gap:18px; list-style:none;}
+  .social a{text-decoration:none; opacity:0.75;}
+  .social a:hover{opacity:1;}
+
+  /* ---------- OFFLINE BANNER ---------- */
+  .offline-banner{
+    position:fixed; top:0; left:0; right:0; z-index:999;
+    background:#B23A2E; color:#fff; text-align:center;
+    padding:10px; font-size:0.85rem;
+    padding-top:calc(10px + env(safe-area-inset-top,0px));
+  }
+  .site-toast{
+    position:fixed; left:50%; bottom:28px; z-index:300;
+    transform:translateX(-50%) translateY(16px);
+    background:var(--forest-deep); color:var(--cream);
+    padding:12px 18px; border-radius:8px;
+    font-size:0.9rem; box-shadow:0 8px 24px rgba(0,0,0,0.25);
+    opacity:0; pointer-events:none;
+    transition:opacity .2s ease, transform .2s ease;
+    max-width:min(90vw, 360px); text-align:center;
+  }
+  .site-toast.is-visible{
+    opacity:1; transform:translateX(-50%) translateY(0);
+  }
+
+  /* ---------- FAB ---------- */
+  .mini-player{
+    position:fixed; left:0; right:0; bottom:0; z-index:85;
+    display:flex; align-items:center; gap:14px;
+    padding:12px 20px;
+    padding-bottom:calc(12px + env(safe-area-inset-bottom));
+    background:var(--forest-deep);
+    border-top:1px solid var(--line);
+    box-shadow:0 -8px 24px rgba(0,0,0,0.25);
+    transform:translateY(110%);
+    transition:transform .3s ease;
+  }
+  .mini-player.visible{transform:translateY(0);}
+  .mini-play{
+    width:38px; height:38px; border-radius:50%; flex-shrink:0;
+    background:var(--gold); color:var(--forest-deep);
+    border:none; display:flex; align-items:center; justify-content:center; cursor:pointer;
+  }
+  .mini-info{display:flex; align-items:center; gap:8px; min-width:0;}
+  .mini-dot{
+    width:7px; height:7px; border-radius:50%; background:var(--gold); flex-shrink:0;
+    animation:pulse 1.8s infinite ease-in-out;
+  }
+  .mini-text{
+    color:var(--cream); font-size:0.85rem; font-weight:500;
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  }
+  .skip-link{
+    position:absolute; top:-48px; left:12px;
+    background:var(--gold); color:var(--forest-deep);
+    padding:10px 18px; border-radius:6px;
+    font-weight:600; font-size:0.9rem; text-decoration:none;
+    z-index:999; transition:top .2s ease;
+  }
+  .skip-link:focus{top:12px;}
+  body.mini-player-visible .fab-container{bottom:88px;}
+  @media(max-width:480px){
+    .mini-text{max-width:52vw;}
+  }
+  .fab-container{
+    position:fixed; right:22px; bottom:22px; z-index:80;
+    display:flex; flex-direction:column-reverse; align-items:center; gap:14px;
+    transition:bottom .3s ease;
+  }
+  .fab-main{
+    width:58px; height:58px; border-radius:50%;
+    background:var(--gold); color:var(--forest-deep);
+    border:none; cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 6px 18px rgba(0,0,0,0.3);
+    transition:transform .2s ease;
+  }
+  .fab-main:hover{ transform:scale(1.06); }
+  .fab-options{
+    display:flex; flex-direction:column; align-items:center; gap:12px;
+  }
+  .fab-option{
+    width:46px; height:46px; border-radius:50%;
+    background:var(--forest); color:var(--cream);
+    display:flex; align-items:center; justify-content:center;
+    text-decoration:none;
+    box-shadow:0 4px 12px rgba(0,0,0,0.25);
+    opacity:0; transform:translateY(12px) scale(0.8);
+    pointer-events:none;
+    transition:opacity .2s ease, transform .2s ease;
+  }
+  .fab-options.open .fab-option{
+    opacity:1; transform:translateY(0) scale(1);
+    pointer-events:auto;
+  }
+  .fab-options.open .fab-option:nth-child(1){ transition-delay:.02s; }
+  .fab-options.open .fab-option:nth-child(2){ transition-delay:.07s; }
+  .fab-options.open .fab-option:nth-child(3){ transition-delay:.12s; }
+
+  /* ---------- MOTION ---------- */
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-body > div:first-child{
+      animation: riseIn .7s ease both;
+    }
+    .player-card{
+      animation: riseIn .7s ease .12s both;
+    }
+    .reveal{
+      opacity:0;
+      transform:translateY(18px);
+      transition:opacity .55s ease, transform .55s ease;
+    }
+    .reveal.is-visible{
+      opacity:1;
+      transform:none;
+    }
+  }
+  @keyframes riseIn{
+    from{ opacity:0; transform:translateY(16px); }
+    to{ opacity:1; transform:none; }
+  }
+
+  @media(max-width:820px){
+    .hero-body{grid-template-columns:1fr;}
+    .app-cta{grid-template-columns:1fr;}
+    .app-phone{order:-1;}
+    .nav-toggle{display:flex;}
+    .nav-links{
+      display:flex;
+      flex-direction:column;
+      gap:0;
+      position:fixed;
+      top:0; right:0;
+      width:min(320px, 86vw);
+      height:100vh;
+      height:100dvh;
+      margin:0;
+      padding:0;
+      background:var(--forest-deep);
+      border-left:1px solid var(--line);
+      box-shadow:-12px 0 40px rgba(0,0,0,0.35);
+      z-index:210;
+      transform:translateX(105%);
+      transition:transform .25s ease;
+      pointer-events:none;
+      color:var(--cream);
+    }
+    .nav-links.open{
+      transform:translateX(0);
+      pointer-events:auto;
+    }
+    .nav-panel-header{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:22px 24px 18px;
+      border-bottom:1px solid var(--line);
+    }
+    .nav-panel-logo{height:34px; width:auto;}
+    .nav-close{
+      width:38px; height:38px; border-radius:8px;
+      border:1px solid var(--line); background:transparent; color:var(--cream);
+      display:flex; align-items:center; justify-content:center; cursor:pointer; flex-shrink:0;
+    }
+    .nav-close:hover{background:rgba(245,247,250,0.08);}
+    .nav-panel-list{
+      display:flex; flex-direction:column; gap:0; list-style:none;
+      margin:0; padding:12px 28px 0; flex:1;
+    }
+    .nav-panel-list a{
+      display:block; padding:16px 0;
+      font-family:'Source Serif 4', serif; font-weight:600; font-size:1.3rem;
+      color:var(--cream); opacity:1; text-decoration:none;
+      border-bottom:1px solid var(--line);
+      transition:color .2s ease, padding-left .2s ease;
+    }
+    .nav-panel-list a:hover{color:var(--gold); padding-left:6px;}
+    .nav-panel-footer{
+      display:flex; align-items:center; gap:9px;
+      padding:18px 28px 26px;
+      font-size:0.8rem; color:rgba(245,247,250,0.6);
+      border-top:1px solid var(--line);
+    }
+    .nav-live-dot{
+      width:8px; height:8px; border-radius:50%; background:var(--gold);
+      animation:pulse 1.8s infinite ease-in-out; flex-shrink:0;
+    }
+    .event-row{grid-template-columns:70px 1fr; row-gap:8px;}
+    .event-tag{grid-column:2;}
+    .prayer-layout{grid-template-columns:1fr; gap:28px;}
+  }
+
+/* ===================== Modo App-Shell (PWA instalada) ===================== */
+/* Solo se activa vía JS cuando la web corre como app instalada (standalone),
+   por ejemplo desde la pantalla de inicio en iPhone. Los visitantes normales
+   del navegador nunca ven ninguno de estos estilos. */
+
+body.app-shell-mode{ overscroll-behavior:none; }
+body.app-shell-mode .skip-link{ display:none; }
+body.app-shell-mode .hero > .nav{ display:none; }
+body.app-shell-mode .hero{ padding-top:calc(24px + env(safe-area-inset-top,0px)); }
+
+.shell-panel{ display:none; }
+.shell-panel.shell-active{
+  display:block;
+  height:100dvh;
+  height:calc(100dvh - 58px - env(safe-area-inset-bottom,0px));
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+}
+
+.shell-tabbar{
+  display:none;
+  position:fixed; left:0; right:0; bottom:0;
+  height:calc(58px + env(safe-area-inset-bottom,0px));
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  background:var(--forest-deep);
+  border-top:1px solid var(--line);
+  z-index:230;
+  align-items:stretch;
+  box-shadow:0 -6px 20px rgba(0,0,0,0.25);
+}
+body.app-shell-mode .shell-tabbar{ display:flex; }
+
+.shell-tab{
+  flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:3px; background:none; border:none; cursor:pointer;
+  color:var(--muted-soft); padding:6px 4px 0;
+  font-family:'Work Sans', sans-serif; font-size:0.66rem; font-weight:600;
+}
+.shell-tab svg{ width:21px; height:21px; }
+.shell-tab.active{ color:var(--gold); }
+
+.shell-panel[data-shell-panel="info"]{ background:var(--forest-deep); }
+body.app-shell-mode footer{
+  flex-direction:column; align-items:flex-start; gap:28px;
+  padding-top:calc(40px + env(safe-area-inset-top,0px)); font-size:0.95rem;
+}
+body.app-shell-mode footer .brand{ font-size:1.4rem; }
+body.app-shell-mode .affiliation{ align-items:flex-start; }
+body.app-shell-mode .social{ flex-direction:column; gap:14px; }
+
+body.app-shell-mode .mini-player{ bottom:calc(58px + env(safe-area-inset-bottom,0px)); }
+body.app-shell-mode .fab-container{ bottom:calc(58px + env(safe-area-inset-bottom,0px) + 16px); }
+</style>
+</head>
+<body>
+
+<a href="#main-start" class="skip-link">Saltar al contenido</a>
+<div class="nav-backdrop" id="navBackdrop" hidden></div>
+
+<div class="hero" data-shell-group="inicio">
+  <nav class="nav" aria-label="Principal">
+    <div class="brand">
+      <img class="brand-logo" src="logo-ondas-light.png" alt="Ondas del Orteguaza">
+    </div>
+    <button class="nav-toggle" id="navToggle" type="button" aria-label="Abrir menú" aria-controls="navLinks" aria-expanded="false">
+      <span class="nav-toggle-eq" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
+    </button>
+    <div class="nav-links" id="navLinks">
+      <div class="nav-panel-header">
+        <img class="nav-panel-logo" src="logo-ondas-light.png" alt="Ondas del Orteguaza">
+        <button class="nav-close" id="navClose" type="button" aria-label="Cerrar menú">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <ul class="nav-panel-list">
+        <li><a href="#parrilla">Programación</a></li>
+        <li><a href="#actividades">Actividades</a></li>
+        <li><a href="#oracion">Oración</a></li>
+        <li><a href="#app">La app</a></li>
+      </ul>
+      <div class="nav-panel-footer">
+        <span class="nav-live-dot" aria-hidden="true"></span> Transmitiendo en vivo — Ondas del Orteguaza
+      </div>
+    </div>
+  </nav>
+
+  <div class="hero-body" id="main-start">
+    <div>
+      <div class="hero-eyebrow">Radio cristiana · Florencia, Caquetá</div>
+      <h1>Ondas del Orteguaza. La radio que bendice tu vida.</h1>
+      <p>Predicaciones, alabanza y compañía para tu día, transmitiendo en vivo desde Florencia para toda la región.</p>
+    </div>
+
+    <div class="player-card" id="playerCard">
+      <div class="player-status"><span class="dot" aria-hidden="true"></span> EN VIVO AHORA</div>
+      <div class="player-title">Ondas del Orteguaza</div>
+      <div class="player-sub" id="nowPlaying">Programación continua</div>
+      <div class="player-controls">
+        <button class="play-btn" id="playBtn" aria-label="Reproducir" type="button">
+          <svg id="iconPlay" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+          <svg id="iconPause" viewBox="0 0 24 24" style="display:none" aria-hidden="true"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+        </button>
+        <div class="volume-row">
+          <label for="vol">Volumen</label>
+          <input type="range" id="vol" min="0" max="1" step="0.05" value="0.9">
+        </div>
+      </div>
+      <audio id="stream" preload="none">
+        <source src="https://stream.zeno.fm/c6hsn4ctgituv" type="audio/mpeg">
+      </audio>
+    </div>
+  </div>
+
+  <div class="hero-wave" aria-hidden="true">
+    <svg class="river" viewBox="0 0 1440 100" preserveAspectRatio="none">
+      <path d="M0,40 C 240,90 480,0 720,40 C 960,80 1200,10 1440,50 L1440,100 L0,100 Z" fill="#F5F7FA"/>
+    </svg>
+  </div>
+</div>
+
+<section id="versiculo" class="verse-section reveal" data-shell-group="inicio">
+  <div class="verse-box">
+    <div class="verse-label">VERSÍCULO DEL DÍA</div>
+    <p id="verseText" class="verse-text">Cargando...</p>
+    <p id="verseRef" class="verse-ref"></p>
+  </div>
+</section>
+
+<section class="share-section reveal" data-shell-group="inicio">
+  <a id="shareBtn" class="share-btn" href="#" target="_blank" rel="noopener">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.22 8.22 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.41 5.83c0 4.55-3.7 8.23-8.24 8.23z"/></svg>
+    Comparte la app por WhatsApp
+  </a>
+</section>
+
+<section class="schedule" id="parrilla" data-shell-group="programacion">
+  <div class="section-head reveal">
+    <div>
+      <div class="section-eyebrow">Cada semana</div>
+      <h2>Parrilla de programación</h2>
+    </div>
+    <p class="section-note">Horarios sujetos a cambios en fechas especiales. Todo se anuncia por nuestras redes.</p>
+  </div>
+
+  <div class="grid-days reveal" id="scheduleGrid">
+    <p class="content-loading">Cargando programación...</p>
+  </div>
+  <p class="schedule-footnote">* Parrilla provisional para la presentación del proyecto — se reemplazará con la programación real.</p>
+</section>
+
+<section id="actividades" data-shell-group="actividades">
+  <div class="section-head reveal">
+    <div>
+      <div class="section-eyebrow">Agenda</div>
+      <h2>Próximas actividades</h2>
+    </div>
+    <p class="section-note">Contenido de ejemplo — reemplázalo con tus fechas y eventos reales.</p>
+  </div>
+
+  <div class="events-list reveal" id="eventsList">
+    <p class="content-loading">Cargando actividades...</p>
+  </div>
+</section>
+
+<section class="prayer reveal" id="oracion" data-shell-group="actividades">
+  <div class="prayer-layout">
+    <div class="prayer-copy">
+      <div class="section-eyebrow">Estamos contigo</div>
+      <h2>Envíanos tu petición de oración</h2>
+      <p>Comparte lo que llevas en el corazón. Oraremos por ti y tu familia con fe y amor.</p>
+    </div>
+
+    <div>
+      <form class="prayer-form" id="prayerForm" name="peticion-oracion" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+        <input type="hidden" name="form-name" value="peticion-oracion">
+        <p class="prayer-hp" aria-hidden="true">
+          <label>No llenar este campo <input name="bot-field" tabindex="-1" autocomplete="off"></label>
+        </p>
+        <div>
+          <label for="prayerName">Nombre <span class="optional">(opcional)</span></label>
+          <input type="text" id="prayerName" name="name" autocomplete="name" maxlength="80" placeholder="Tu nombre">
+        </div>
+        <div>
+          <label for="prayerRequest">Petición</label>
+          <textarea id="prayerRequest" name="request" required maxlength="800" placeholder="Cuéntanos por qué quieres que oremos..."></textarea>
+        </div>
+        <label class="prayer-consent">
+          <input type="checkbox" id="prayerConsent" name="autorizacion" value="Sí autorizo" required>
+          <span>Autorizo a Ondas del Orteguaza a tratar estos datos solo para orar por mi petición, según la <a href="/privacy-policy.html" target="_blank" rel="noopener">política de privacidad</a>.</span>
+        </label>
+        <button type="submit" class="prayer-submit" id="prayerSubmit">Enviar petición</button>
+        <p class="prayer-note" id="prayerNote" role="alert" aria-live="assertive"></p>
+      </form>
+
+      <div class="prayer-success" id="prayerSuccess" role="status" aria-live="polite">
+        <h3>Gracias. Recibimos tu petición.</h3>
+        <p>Nuestro equipo de oración la tendrá presente. Que Dios te bendiga a ti y a tu familia.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="app-cta reveal" id="app" data-shell-group="info">
+  <div>
+    <div class="section-eyebrow">Llévala contigo</div>
+    <h2>Descarga la app de Ondas del Orteguaza</h2>
+    <p id="appCtaText">Escúchanos en vivo con un toque, consulta la programación y no te pierdas nuestras actividades.</p>
+    <a class="store-btn" id="storeBtn" href="https://play.google.com/store/apps/details?id=co.ondasdelorteguaza.app" target="_blank" rel="noopener">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 20.5V3.5c0-.6.3-1.1.8-1.4L14 12 3.8 21.9c-.5-.3-.8-.8-.8-1.4zM16.8 14.9 5.5 22.7l8.4-8.4 2.9.6zm3.5-6.9c.6.4 1 1 1 1.8s-.4 1.4-1 1.8l-2.6 1.6-3.1-3.1V9.3l2.6-1.6c.5.4 1.5.4 2.1.4zM5.5 1.3l11.3 7.8-2.9.6-8.4-8.4z"/></svg>
+      Disponible en Google Play
+    </a>
+    <ol class="ios-steps" id="iosSteps" hidden>
+      <li>Abre esta página en <strong>Safari</strong>.</li>
+      <li>Toca el botón <strong>Compartir</strong> (el cuadro con la flecha hacia arriba).</li>
+      <li>Elige <strong>Agregar a pantalla de inicio</strong> y luego <strong>Agregar</strong>.</li>
+    </ol>
+  </div>
+  <div class="app-phone">
+    <img src="logo-ondas.png" alt="Ondas del Orteguaza">
+  </div>
+</section>
+
+<footer data-shell-group="info">
+  <div class="brand">Ondas del Orteguaza</div>
+  <div class="affiliation">
+    <div class="affiliation-label">Movimiento Misionero Mundial</div>
+    <div class="affiliation-logo">
+      <img src="logo-mmm.png" alt="Movimiento Misionero Mundial" width="64" height="64" loading="lazy" decoding="async">
+    </div>
+  </div>
+  <ul class="social">
+    <li><a href="#" data-social="facebook" title="Facebook" target="_blank" rel="noopener">Facebook</a></li>
+    <li><a href="#" data-social="whatsapp" title="WhatsApp" target="_blank" rel="noopener">WhatsApp</a></li>
+    <li><a href="#" data-social="instagram" title="Instagram" target="_blank" rel="noopener">Instagram</a></li>
+    <li><a href="/privacy-policy.html">Privacidad</a></li>
+  </ul>
+  <div>Florencia, Caquetá — Colombia</div>
+</footer>
+
+<div class="mini-player" id="miniPlayer">
+  <button class="mini-play" id="miniPlayBtn" type="button" aria-label="Reproducir">
+    <svg id="miniIconPlay" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+    <svg id="miniIconPause" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="display:none"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+  </button>
+  <div class="mini-info">
+    <span class="mini-dot" aria-hidden="true"></span>
+    <span class="mini-text" id="miniStatusText">Ondas del Orteguaza</span>
+  </div>
+</div>
+
+<div class="fab-container">
+  <div class="fab-options" id="fabOptions">
+    <a href="#" class="fab-option" data-social="facebook" aria-label="Facebook" title="Facebook" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M14 13.5h2.5l1-4H14v-2c0-1.03 0-2 2-2h1.5V2.14C17.17 2.09 15.95 2 14.66 2 11.96 2 10 3.66 10 6.7v2.8H7v4h3V22h4v-8.5z"/></svg>
+    </a>
+    <a href="#" class="fab-option" data-social="instagram" aria-label="Instagram" title="Instagram" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M12 2c2.72 0 3.06.01 4.12.06 1.06.05 1.79.22 2.43.47.66.26 1.21.6 1.76 1.15.5.5.9 1.1 1.15 1.76.25.64.42 1.37.47 2.43.05 1.06.06 1.4.06 4.12s-.01 3.06-.06 4.12c-.05 1.06-.22 1.79-.47 2.43a4.9 4.9 0 0 1-1.15 1.76 4.9 4.9 0 0 1-1.76 1.15c-.64.25-1.37.42-2.43.47-1.06.05-1.4.06-4.12.06s-3.06-.01-4.12-.06c-1.06-.05-1.79-.22-2.43-.47a4.9 4.9 0 0 1-1.76-1.15 4.9 4.9 0 0 1-1.15-1.76c-.25-.64-.42-1.37-.47-2.43C2.01 15.06 2 14.72 2 12s.01-3.06.06-4.12c.05-1.06.22-1.79.47-2.43.26-.66.6-1.21 1.15-1.76a4.9 4.9 0 0 1 1.76-1.15c.64-.25 1.37-.42 2.43-.47C8.94 2.01 9.28 2 12 2zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 8.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4zm5.2-8.4a1.2 1.2 0 1 1-2.4 0 1.2 1.2 0 0 1 2.4 0z"/></svg>
+    </a>
+    <a href="#" class="fab-option" data-social="whatsapp" aria-label="WhatsApp" title="WhatsApp" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.22 8.22 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.41 5.83c0 4.55-3.7 8.23-8.24 8.23z"/></svg>
+    </a>
+  </div>
+  <button class="fab-main" id="fabMain" aria-label="Nuestras redes sociales" aria-expanded="false" type="button">
+    <svg id="fabIconOpen" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+    <svg id="fabIconClose" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.4" style="display:none" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg>
+  </button>
+</div>
+
+<script>
+(function () {
+  const audio = document.getElementById('stream');
+  const btn = document.getElementById('playBtn');
+  const iconPlay = document.getElementById('iconPlay');
+  const iconPause = document.getElementById('iconPause');
+  const vol = document.getElementById('vol');
+  const nowPlaying = document.getElementById('nowPlaying');
+
+  const miniPlayer = document.getElementById('miniPlayer');
+  const miniPlayBtn = document.getElementById('miniPlayBtn');
+  const miniIconPlay = document.getElementById('miniIconPlay');
+  const miniIconPause = document.getElementById('miniIconPause');
+  const miniStatusText = document.getElementById('miniStatusText');
+
+  const STATION_NAME = 'Ondas del Orteguaza';
+  const STATION_ART = new URL('icon-512.png', window.location.href).href;
+
+  audio.volume = Number(vol.value);
+
+  const isAndroidApp = () => typeof AndroidRadio !== 'undefined';
+
+  let connectingDots = null;
+  let isPlaying = false;
+  let isConnecting = false;
+  let isError = false;
+  let scheduleData = null;
+  let currentShow = null;
+
+  function clearConnectingAnimation() {
+    if (connectingDots) {
+      clearInterval(connectingDots);
+      connectingDots = null;
+    }
+  }
+
+  function statusLabel(playing) {
+    if (currentShow && currentShow.kind === 'now') {
+      return playing
+        ? 'En vivo · ' + currentShow.title
+        : 'Ahora · ' + currentShow.title;
+    }
+    if (currentShow && currentShow.kind === 'next') {
+      return 'Próximo · ' + currentShow.title + ' (' + currentShow.time + ')';
+    }
+    return playing ? 'Reproduciendo en vivo' : 'Programación continua';
+  }
+
+  function updateMediaSession(playing) {
+    if (!('mediaSession' in navigator)) return;
+    try {
+      navigator.mediaSession.metadata = new MediaMetadata({
+        title: currentShow && currentShow.kind === 'now' ? currentShow.title : STATION_NAME,
+        artist: STATION_NAME + ' · En vivo',
+        album: 'Florencia, Caquetá',
+        artwork: [
+          { src: STATION_ART, sizes: '512x512', type: 'image/png' }
+        ]
+      });
+      navigator.mediaSession.playbackState = playing ? 'playing' : 'paused';
+    } catch (_) { /* Media Session no disponible en este contexto */ }
+  }
+
+  function setUiPlaying(playing) {
+    isPlaying = playing;
+    isConnecting = false;
+    isError = false;
+    clearConnectingAnimation();
+    iconPlay.style.display = playing ? 'none' : 'block';
+    iconPause.style.display = playing ? 'block' : 'none';
+    btn.disabled = false;
+    btn.setAttribute('aria-label', playing ? 'Pausar' : 'Reproducir');
+    nowPlaying.textContent = statusLabel(playing);
+    miniIconPlay.style.display = playing ? 'none' : 'block';
+    miniIconPause.style.display = playing ? 'block' : 'none';
+    miniPlayBtn.setAttribute('aria-label', playing ? 'Pausar' : 'Reproducir');
+    miniStatusText.textContent = statusLabel(playing);
+    updateMediaSession(playing);
+    if (document.body.classList.contains('app-shell-mode')) {
+      const onInicio = document.body.getAttribute('data-shell-tab') === 'inicio' || !document.body.hasAttribute('data-shell-tab');
+      miniPlayer.classList.toggle('visible', playing && !onInicio);
+      document.body.classList.toggle('mini-player-visible', playing && !onInicio);
+    }
+  }
+
+  function setUiConnecting() {
+    isConnecting = true;
+    isError = false;
+    iconPlay.style.display = 'none';
+    iconPause.style.display = 'none';
+    btn.disabled = true;
+    btn.setAttribute('aria-label', 'Conectando');
+    miniIconPlay.style.display = 'none';
+    miniIconPause.style.display = 'none';
+    miniPlayBtn.setAttribute('aria-label', 'Conectando');
+    let dots = 0;
+    clearConnectingAnimation();
+    connectingDots = setInterval(() => {
+      dots = (dots + 1) % 4;
+      const text = 'Conectando' + '.'.repeat(dots);
+      nowPlaying.textContent = text;
+      miniStatusText.textContent = text;
+    }, 400);
+  }
+
+  function setUiError(message) {
+    isPlaying = false;
+    isConnecting = false;
+    isError = true;
+    clearConnectingAnimation();
+    iconPlay.style.display = 'block';
+    iconPause.style.display = 'none';
+    btn.disabled = false;
+    btn.setAttribute('aria-label', 'Reproducir');
+    nowPlaying.textContent = message;
+    miniIconPlay.style.display = 'block';
+    miniIconPause.style.display = 'none';
+    miniPlayBtn.setAttribute('aria-label', 'Reproducir');
+    miniStatusText.textContent = 'Ondas del Orteguaza';
+    updateMediaSession(false);
+  }
+
+  // Android llama a estas funciones desde el WebView
+  window.setNativeConnecting = function () {
+    setUiConnecting();
+  };
+
+  window.setNativePlaybackState = function (playing) {
+    setUiPlaying(Boolean(playing));
+  };
+
+  async function playBrowserStream() {
+    setUiConnecting();
+    try {
+      // Recarga la fuente en cada play: en radio en vivo, reanudar desde el
+      // búfer dejaría al oyente minutos atrasado (y también limpia errores)
+      audio.load();
+      await audio.play();
+    } catch (err) {
+      const offline = !navigator.onLine;
+      setUiError(
+        offline
+          ? 'Sin conexión — no se puede reproducir'
+          : 'No se pudo conectar al stream. Intenta de nuevo.'
+      );
+    }
+  }
+
+  btn.addEventListener('click', () => {
+    if (isAndroidApp()) {
+      if (isPlaying || iconPause.style.display === 'block') {
+        AndroidRadio.pause();
+      } else {
+        setUiConnecting();
+        AndroidRadio.play();
+      }
+      return;
+    }
+
+    if (audio.paused) {
+      playBrowserStream();
+    } else {
+      audio.pause();
+      setUiPlaying(false);
+    }
+  });
+
+  audio.addEventListener('waiting', () => {
+    if (!audio.paused) setUiConnecting();
+  });
+  audio.addEventListener('playing', () => setUiPlaying(true));
+  audio.addEventListener('pause', () => {
+    if (!isConnecting) setUiPlaying(false);
+  });
+  audio.addEventListener('error', () => {
+    setUiError('Error de stream — revisa tu conexión e intenta de nuevo');
+  });
+  audio.addEventListener('stalled', () => {
+    if (!audio.paused) setUiConnecting();
+  });
+
+  // El botón del mini-reproductor simplemente activa el botón principal,
+  // así toda la lógica de reproducción vive en un solo lugar.
+  miniPlayBtn.addEventListener('click', () => btn.click());
+
+  // Muestra el mini-reproductor solo cuando el reproductor principal
+  // ya no está a la vista (para no duplicar controles en pantalla).
+  const playerCard = document.getElementById('playerCard');
+  if (playerCard && 'IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const inShell = document.body.classList.contains('app-shell-mode');
+          const show = inShell ? (!entry.isIntersecting && isPlaying) : !entry.isIntersecting;
+          miniPlayer.classList.toggle('visible', show);
+          document.body.classList.toggle('mini-player-visible', show);
+        });
+      },
+      { threshold: 0 }
+    );
+    observer.observe(playerCard);
+  }
+
+  vol.addEventListener('input', () => {
+    audio.volume = Number(vol.value);
+    if (isAndroidApp() && typeof AndroidRadio.setVolume === 'function') {
+      AndroidRadio.setVolume(Number(vol.value));
+    }
+  });
+
+  if ('mediaSession' in navigator) {
+    try {
+      navigator.mediaSession.setActionHandler('play', () => {
+        if (isAndroidApp()) {
+          setUiConnecting();
+          AndroidRadio.play();
+        } else {
+          playBrowserStream();
+        }
+      });
+      navigator.mediaSession.setActionHandler('pause', () => {
+        if (isAndroidApp()) {
+          AndroidRadio.pause();
+        } else {
+          audio.pause();
+          setUiPlaying(false);
+        }
+      });
+      navigator.mediaSession.setActionHandler('stop', () => {
+        if (isAndroidApp()) {
+          AndroidRadio.pause();
+        } else {
+          audio.pause();
+          setUiPlaying(false);
+        }
+      });
+    } catch (_) { /* handlers no soportados */ }
+  }
+
+  // ---------- Contenido dinámico (content.json) ----------
+  function dayOfYear(date) {
+    const start = new Date(date.getFullYear(), 0, 0);
+    const diff = date - start;
+    return Math.floor(diff / 86400000);
+  }
+
+  function escapeHtml(str) {
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  function todayDayName() {
+    const names = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+    return names[new Date().getDay()];
+  }
+
+  /** Convierte "5:30 a.m." / "12:00 p.m." a minutos desde medianoche */
+  function parseTimeToMinutes(timeStr) {
+    const match = String(timeStr).trim().match(/^(\d{1,2}):(\d{2})\s*(a\.m\.|p\.m\.)$/i);
+    if (!match) return null;
+    let hours = Number(match[1]);
+    const minutes = Number(match[2]);
+    const period = match[3].toLowerCase();
+    if (period === 'a.m.') {
+      if (hours === 12) hours = 0;
+    } else if (hours !== 12) {
+      hours += 12;
+    }
+    return hours * 60 + minutes;
+  }
+
+  function getCurrentShow(schedule) {
+    if (!schedule) return null;
+    const slots = schedule[todayDayName()] || [];
+    if (!slots.length) return null;
+
+    const now = new Date();
+    const nowMinutes = now.getHours() * 60 + now.getMinutes();
+
+    const parsed = slots.map((slot, index) => ({
+      index,
+      title: slot.title,
+      time: slot.time,
+      minutes: parseTimeToMinutes(slot.time)
+    })).filter((s) => s.minutes !== null);
+
+    if (!parsed.length) return null;
+
+    let current = null;
+    for (const slot of parsed) {
+      if (slot.minutes <= nowMinutes) current = slot;
+    }
+
+    if (current) {
+      return { kind: 'now', title: current.title, time: current.time, index: current.index };
+    }
+
+    const next = parsed[0];
+    return { kind: 'next', title: next.title, time: next.time, index: next.index };
+  }
+
+  function highlightCurrentSlot() {
+    document.querySelectorAll('.slot.is-now').forEach((el) => el.classList.remove('is-now'));
+    if (!currentShow || currentShow.kind !== 'now') return;
+    const todayCol = document.querySelector('.day-col[data-today="true"]');
+    if (!todayCol) return;
+    const slots = todayCol.querySelectorAll('.slot');
+    const slotEl = slots[currentShow.index];
+    if (slotEl) slotEl.classList.add('is-now');
+  }
+
+  function refreshNowPlaying() {
+    currentShow = getCurrentShow(scheduleData);
+    highlightCurrentSlot();
+    if (isConnecting || isError) return;
+    nowPlaying.textContent = statusLabel(isPlaying);
+    updateMediaSession(isPlaying);
+  }
+
+  function renderSchedule(schedule) {
+    const grid = document.getElementById('scheduleGrid');
+    if (!grid || !schedule) return;
+
+    const today = todayDayName();
+    const days = Object.keys(schedule);
+    grid.innerHTML = days.map((day) => {
+      const isToday = day === today;
+      const slots = (schedule[day] || []).map((slot) =>
+        `<div class="slot"><span>${escapeHtml(slot.title)}</span><time>${escapeHtml(slot.time)}</time></div>`
+      ).join('');
+      const badge = isToday ? '<span class="day-badge">Hoy</span>' : '';
+      return `<div class="day-col${isToday ? ' is-today' : ''}"${isToday ? ' data-today="true"' : ''}>
+        <h3><span>${escapeHtml(day)}</span>${badge}</h3>
+        ${slots}
+      </div>`;
+    }).join('');
+
+    refreshNowPlaying();
+  }
+
+  /** Fecha de hoy en Colombia como "AAAA-MM-DD" (sin importar la zona horaria del celular) */
+  function todayIsoBogota() {
+    try {
+      return new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Bogota' }).format(new Date());
+    } catch (_) {
+      const d = new Date();
+      return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+    }
+  }
+
+  function renderActivities(allActivities) {
+    const list = document.getElementById('eventsList');
+    if (!list) return;
+
+    // Las actividades con "date" ya pasada se ocultan solas; las que no tienen fecha se muestran siempre
+    const today = todayIsoBogota();
+    const activities = (allActivities || []).filter((event) =>
+      !/^\d{4}-\d{2}-\d{2}$/.test(event.date || '') || event.date >= today
+    );
+
+    if (!activities.length) {
+      list.innerHTML = '<p class="content-loading">No hay actividades próximas.</p>';
+      return;
+    }
+
+    list.innerHTML = activities.map((event) => `
+      <div class="event-row">
+        <div class="event-date">
+          <span class="num">${escapeHtml(event.day)}</span>
+          <span class="mon">${escapeHtml(event.month)}</span>
+        </div>
+        <div class="event-info">
+          <h3>${escapeHtml(event.title)}</h3>
+          <p>${escapeHtml(event.description)}</p>
+        </div>
+        <div class="event-tag">${escapeHtml(event.tag)}</div>
+      </div>
+    `).join('');
+  }
+
+  function renderVerse(verses) {
+    const verseTextEl = document.getElementById('verseText');
+    const verseRefEl = document.getElementById('verseRef');
+    if (!verseTextEl || !verseRefEl || !verses || !verses.length) return;
+
+    const todayVerse = verses[dayOfYear(new Date()) % verses.length];
+    verseTextEl.textContent = '"' + todayVerse.text + '"';
+    verseRefEl.textContent = todayVerse.ref;
+  }
+
+  /** Solo aceptamos enlaces https:// (evita enlaces raros si alguien edita mal el archivo) */
+  function safeHttpsUrl(value) {
+    try {
+      const url = new URL(String(value || '').trim());
+      return url.protocol === 'https:' ? url.href : '';
+    } catch (_) {
+      return '';
+    }
+  }
+
+  function socialUrl(network, value) {
+    const raw = String(value || '').trim();
+    // Para WhatsApp se puede poner solo el número (ej. 573001234567)
+    if (network === 'whatsapp' && /^\+?\d{8,15}$/.test(raw)) {
+      return 'https://wa.me/' + raw.replace('+', '');
+    }
+    return safeHttpsUrl(raw);
+  }
+
+  function applyConfig(config) {
+    if (!config) return;
+
+    const streamUrl = safeHttpsUrl(config.streamUrl);
+    const source = audio.querySelector('source');
+    if (streamUrl && source && source.src !== streamUrl && audio.paused) {
+      source.src = streamUrl;
+    }
+
+    const social = config.social || {};
+    document.querySelectorAll('[data-social]').forEach((link) => {
+      const url = socialUrl(link.dataset.social, social[link.dataset.social]);
+      if (url) link.href = url;
+    });
+  }
+
+  async function loadContent() {
+    try {
+      const res = await fetch('content.json', { cache: 'no-cache' });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const data = await res.json();
+      applyConfig(data.config);
+      scheduleData = data.schedule || null;
+      renderSchedule(data.schedule);
+      renderActivities(data.activities);
+      renderVerse(data.verses);
+    } catch (err) {
+      const scheduleGrid = document.getElementById('scheduleGrid');
+      const eventsList = document.getElementById('eventsList');
+      const verseTextEl = document.getElementById('verseText');
+      if (scheduleGrid) {
+        scheduleGrid.innerHTML = '<p class="content-loading">No se pudo cargar la programación.</p>';
+      }
+      if (eventsList) {
+        eventsList.innerHTML = '<p class="content-loading">No se pudieron cargar las actividades.</p>';
+      }
+      if (verseTextEl) {
+        verseTextEl.textContent = '"Todo lo puedo en Cristo que me fortalece."';
+        const verseRefEl = document.getElementById('verseRef');
+        if (verseRefEl) verseRefEl.textContent = 'Filipenses 4:13';
+      }
+    }
+  }
+
+  loadContent();
+  setInterval(refreshNowPlaying, 60000);
+
+  // ---------- Animaciones al hacer scroll ----------
+  if ('IntersectionObserver' in window) {
+    const reveals = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach((el) => io.observe(el));
+  } else {
+    document.querySelectorAll('.reveal').forEach((el) => el.classList.add('is-visible'));
+  }
+
+  // ---------- Formulario de oración (Netlify Forms) ----------
+  const prayerForm = document.getElementById('prayerForm');
+  const prayerSuccess = document.getElementById('prayerSuccess');
+  const prayerSubmit = document.getElementById('prayerSubmit');
+  const prayerRequest = document.getElementById('prayerRequest');
+  const prayerConsent = document.getElementById('prayerConsent');
+  const prayerNote = document.getElementById('prayerNote');
+
+  if (prayerForm && prayerSuccess && prayerRequest && prayerConsent) {
+    prayerForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      prayerNote.textContent = '';
+      const text = prayerRequest.value.trim();
+      if (!text) {
+        prayerRequest.focus();
+        prayerRequest.setCustomValidity('Escribe tu petición de oración.');
+        prayerRequest.reportValidity();
+        return;
+      }
+      prayerRequest.setCustomValidity('');
+      if (!prayerConsent.checked) {
+        prayerConsent.focus();
+        prayerConsent.setCustomValidity('Necesitamos tu autorización para recibir la petición.');
+        prayerConsent.reportValidity();
+        return;
+      }
+      prayerConsent.setCustomValidity('');
+
+      prayerSubmit.disabled = true;
+      prayerSubmit.textContent = 'Enviando...';
+      try {
+        const res = await fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams(new FormData(prayerForm)).toString()
+        });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        prayerForm.classList.add('is-hidden');
+        prayerSuccess.classList.add('is-visible');
+        prayerForm.reset();
+      } catch (err) {
+        // Solo confirmamos cuando el envío llegó de verdad
+        prayerNote.textContent = navigator.onLine
+          ? 'No pudimos enviar tu petición. Intenta de nuevo en un momento.'
+          : 'Sin conexión: tu petición no se envió. Conéctate a internet e intenta de nuevo.';
+      } finally {
+        prayerSubmit.disabled = false;
+        prayerSubmit.textContent = 'Enviar petición';
+      }
+    });
+
+    prayerRequest.addEventListener('input', () => {
+      prayerRequest.setCustomValidity('');
+    });
+    prayerConsent.addEventListener('change', () => {
+      prayerConsent.setCustomValidity('');
+    });
+  }
+
+  // ---------- Compartir por WhatsApp ----------
+  const shareBtn = document.getElementById('shareBtn');
+  if (shareBtn) {
+    const shareMessage =
+      '¡Hola! Te invito a escuchar Ondas del Orteguaza, la radio que bendice tu vida 🙏📻 Predicaciones, alabanza y compañía para tu día: ' +
+      window.location.href;
+    shareBtn.href = 'https://wa.me/?text=' + encodeURIComponent(shareMessage);
+  }
+
+  // ---------- Aviso de sin conexión ----------
+  function updateConnectionBanner() {
+    let banner = document.getElementById('offlineBanner');
+    if (!navigator.onLine) {
+      if (!banner) {
+        banner = document.createElement('div');
+        banner.id = 'offlineBanner';
+        banner.className = 'offline-banner';
+        banner.textContent = 'Sin conexión a internet — algunas funciones pueden no cargar.';
+        document.body.prepend(banner);
+      }
+    } else if (banner) {
+      banner.remove();
+    }
+  }
+  window.addEventListener('online', updateConnectionBanner);
+  window.addEventListener('offline', updateConnectionBanner);
+  updateConnectionBanner();
+
+  // ---------- Menú móvil ----------
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  const navClose = document.getElementById('navClose');
+  const navBackdrop = document.getElementById('navBackdrop');
+
+  function setNavOpen(open) {
+    navLinks.classList.toggle('open', open);
+    navBackdrop.classList.toggle('open', open);
+    navBackdrop.hidden = !open;
+    navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    navToggle.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+    document.body.classList.toggle('nav-open', open);
+  }
+
+  navToggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    setNavOpen(!navLinks.classList.contains('open'));
+  });
+
+  navBackdrop.addEventListener('click', () => setNavOpen(false));
+  if (navClose) navClose.addEventListener('click', () => setNavOpen(false));
+
+  navLinks.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', (e) => {
+      const href = link.getAttribute('href') || '';
+      if (!href.startsWith('#')) {
+        setNavOpen(false);
+        return;
+      }
+      e.preventDefault();
+      const target = document.querySelector(href);
+      setNavOpen(false);
+      // Esperar a que se quite overflow:hidden del body antes de hacer scroll
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+          try {
+            history.pushState(null, '', href);
+          } catch (_) { /* ignore */ }
+        });
+      });
+    });
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 820 && navLinks.classList.contains('open')) {
+      setNavOpen(false);
+    }
+  });
+
+  // ---------- FAB redes sociales ----------
+  const fabMain = document.getElementById('fabMain');
+  const fabOptions = document.getElementById('fabOptions');
+  const fabIconOpen = document.getElementById('fabIconOpen');
+  const fabIconClose = document.getElementById('fabIconClose');
+
+  function setFabOpen(open) {
+    fabOptions.classList.toggle('open', open);
+    fabIconOpen.style.display = open ? 'none' : 'block';
+    fabIconClose.style.display = open ? 'block' : 'none';
+    fabMain.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+
+  function showToast(message) {
+    let toast = document.getElementById('siteToast');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'siteToast';
+      toast.className = 'site-toast';
+      document.body.appendChild(toast);
+    }
+    toast.textContent = message;
+    toast.classList.add('is-visible');
+    clearTimeout(showToast._timer);
+    showToast._timer = setTimeout(() => toast.classList.remove('is-visible'), 2600);
+  }
+
+  fabMain.addEventListener('click', (e) => {
+    e.stopPropagation();
+    setFabOpen(!fabOptions.classList.contains('open'));
+  });
+
+  document.querySelectorAll('[data-social]').forEach((link) => {
+    link.addEventListener('click', (e) => {
+      const href = link.getAttribute('href') || '';
+      if (!href || href === '#') {
+        e.preventDefault();
+        setFabOpen(false);
+        showToast('Pronto conectaremos ' + (link.getAttribute('title') || 'nuestras redes') + '.');
+      }
+    });
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!fabOptions.classList.contains('open')) return;
+    if (!e.target.closest('.fab-container')) setFabOpen(false);
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    if (navLinks.classList.contains('open')) setNavOpen(false);
+    if (fabOptions.classList.contains('open')) setFabOpen(false);
+  });
+
+  // ---------- Sección "La app" según el dispositivo ----------
+  const isIos = /iPhone|iPad|iPod/.test(navigator.userAgent) ||
+    (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  const appCta = document.getElementById('app');
+  const storeBtn = document.getElementById('storeBtn');
+  const iosSteps = document.getElementById('iosSteps');
+  const appCtaText = document.getElementById('appCtaText');
+  const navAppLink = document.querySelector('.nav-panel-list a[href="#app"]');
+  if (isAndroidApp() || isStandalonePwa()) {
+    // Ya está dentro de la app: no tiene sentido invitar a descargarla
+    if (appCta) appCta.hidden = true;
+    if (navAppLink) navAppLink.parentElement.hidden = true;
+  } else if (isIos && storeBtn && iosSteps) {
+    storeBtn.hidden = true;
+    iosSteps.hidden = false;
+    if (appCtaText) appCtaText.textContent = 'En iPhone no necesitas App Store: instálala gratis desde Safari en tres pasos.';
+  }
+
+  // ---------- Service worker (abrir sin conexión) ----------
+  if ('serviceWorker' in navigator && !isAndroidApp()) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('sw.js').catch(() => { /* sin soporte: la web sigue funcionando */ });
+    });
+  }
+
+  // ---------- App-Shell: navegación tipo app cuando está instalada (PWA) ----------
+  function isStandalonePwa() {
+    return window.matchMedia('(display-mode: standalone)').matches ||
+           window.navigator.standalone === true;
+  }
+
+  function initAppShell() {
+    document.body.classList.add('app-shell-mode');
+    document.body.setAttribute('data-shell-tab', 'inicio');
+
+    const views = ['inicio', 'programacion', 'actividades', 'info'];
+    const labels = { inicio: 'Inicio', programacion: 'Programación', actividades: 'Actividades', info: 'Info' };
+    const icons = {
+      inicio: '<path d="M12,14c1.66,0 3,-1.34 3,-3V5c0,-1.66 -1.34,-3 -3,-3S9,3.34 9,5v6C9,12.66 10.34,14 12,14zM17,11c0,2.76 -2.24,5 -5,5s-5,-2.24 -5,-5H5c0,3.53 2.61,6.43 6,6.92V21h2v-3.08c3.39,-0.49 6,-3.39 6,-6.92H17z"/>',
+      programacion: '<path d="M17,12h-5v5h5v-5zM16,1v2H8V1H6v2H5c-1.11,0 -1.99,0.9 -1.99,2L3,19c0,1.1 0.89,2 2,2h14c1.1,0 2,-0.9 2,-2V5c0,-1.1 -0.9,-2 -2,-2h-1V1h-2zM19,19H5V8h14v11z"/>',
+      actividades: '<path d="M12,17.27L18.18,21l-1.64,-7.03L22,9.24l-7.19,-0.61L12,2 9.19,8.63 2,9.24l5.46,4.73L5.82,21z"/>',
+      info: '<path d="M11,7h2v2h-2zM11,11h2v6h-2zM12,2C6.48,2 2,6.48 2,12s4.48,10 10,10 10,-4.48 10,-10S17.52,2 12,2zM12,20c-4.41,0 -8,-3.59 -8,-8s3.59,-8 8,-8 8,3.59 8,8 -3.59,8 -8,8z"/>'
+    };
+
+    const panels = {};
+    views.forEach((v) => {
+      const panel = document.createElement('div');
+      panel.className = 'shell-panel';
+      panel.dataset.shellPanel = v;
+      panels[v] = panel;
+    });
+
+    document.querySelectorAll('[data-shell-group]').forEach((el) => {
+      const v = el.getAttribute('data-shell-group');
+      if (panels[v]) panels[v].appendChild(el);
+    });
+
+    const miniPlayerEl = document.getElementById('miniPlayer');
+    views.forEach((v) => document.body.insertBefore(panels[v], miniPlayerEl));
+    panels.inicio.classList.add('shell-active');
+
+    const tabbar = document.createElement('nav');
+    tabbar.className = 'shell-tabbar';
+    tabbar.setAttribute('aria-label', 'Navegación de la app');
+    views.forEach((v) => {
+      const tab = document.createElement('button');
+      tab.type = 'button';
+      tab.className = 'shell-tab' + (v === 'inicio' ? ' active' : '');
+      tab.dataset.tab = v;
+      tab.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">' + icons[v] + '</svg><span>' + labels[v] + '</span>';
+      tab.addEventListener('click', () => {
+        views.forEach((vv) => panels[vv].classList.toggle('shell-active', vv === v));
+        tabbar.querySelectorAll('.shell-tab').forEach((b) => b.classList.toggle('active', b === tab));
+        panels[v].scrollTop = 0;
+        document.body.setAttribute('data-shell-tab', v);
+        const onInicio = v === 'inicio';
+        miniPlayer.classList.toggle('visible', isPlaying && !onInicio);
+        document.body.classList.toggle('mini-player-visible', isPlaying && !onInicio);
+      });
+      tabbar.appendChild(tab);
+    });
+    document.body.appendChild(tabbar);
+  }
+
+  if (isStandalonePwa()) {
+    initAppShell();
+  }
+})();
+</script>
+
+</body>
+</html>

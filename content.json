@@ -1,0 +1,238 @@
+{
+  "config": {
+    "streamUrl": "https://stream.zeno.fm/c6hsn4ctgituv",
+    "social": {
+      "facebook": "",
+      "instagram": "",
+      "whatsapp": ""
+    }
+  },
+  "schedule": {
+    "Lunes": [
+      {
+        "time": "5:30 a.m.",
+        "title": "Buenos días con Cristo"
+      },
+      {
+        "time": "7:00 a.m.",
+        "title": "Alabanza continua"
+      },
+      {
+        "time": "12:00 p.m.",
+        "title": "Palabra de vida"
+      },
+      {
+        "time": "7:00 p.m.",
+        "title": "Predicación de la noche"
+      }
+    ],
+    "Martes": [
+      {
+        "time": "5:30 a.m.",
+        "title": "Buenos días con Cristo"
+      },
+      {
+        "time": "7:00 a.m.",
+        "title": "Alabanza continua"
+      },
+      {
+        "time": "3:00 p.m.",
+        "title": "Consultorio espiritual"
+      },
+      {
+        "time": "7:00 p.m.",
+        "title": "Predicación de la noche"
+      }
+    ],
+    "Miércoles": [
+      {
+        "time": "5:30 a.m.",
+        "title": "Buenos días con Cristo"
+      },
+      {
+        "time": "7:00 a.m.",
+        "title": "Alabanza continua"
+      },
+      {
+        "time": "12:00 p.m.",
+        "title": "Palabra de vida"
+      },
+      {
+        "time": "7:00 p.m.",
+        "title": "Estudio bíblico en vivo"
+      }
+    ],
+    "Jueves": [
+      {
+        "time": "5:30 a.m.",
+        "title": "Buenos días con Cristo"
+      },
+      {
+        "time": "7:00 a.m.",
+        "title": "Alabanza continua"
+      },
+      {
+        "time": "3:00 p.m.",
+        "title": "Espacio familiar"
+      },
+      {
+        "time": "7:00 p.m.",
+        "title": "Predicación de la noche"
+      }
+    ],
+    "Viernes": [
+      {
+        "time": "5:30 a.m.",
+        "title": "Buenos días con Cristo"
+      },
+      {
+        "time": "7:00 a.m.",
+        "title": "Alabanza continua"
+      },
+      {
+        "time": "12:00 p.m.",
+        "title": "Palabra de vida"
+      },
+      {
+        "time": "8:00 p.m.",
+        "title": "Noche de vigilia"
+      }
+    ],
+    "Sábado": [
+      {
+        "time": "8:00 a.m.",
+        "title": "Alabanza y adoración"
+      },
+      {
+        "time": "11:00 a.m.",
+        "title": "Voces jóvenes"
+      },
+      {
+        "time": "3:00 p.m.",
+        "title": "Estudio bíblico"
+      },
+      {
+        "time": "6:00 p.m.",
+        "title": "Especial de fin de semana"
+      }
+    ],
+    "Domingo": [
+      {
+        "time": "7:00 a.m.",
+        "title": "Devocional dominical"
+      },
+      {
+        "time": "9:00 a.m.",
+        "title": "Transmisión del culto"
+      },
+      {
+        "time": "3:00 p.m.",
+        "title": "Alabanza de la tarde"
+      },
+      {
+        "time": "6:00 p.m.",
+        "title": "Reflexión de cierre"
+      }
+    ]
+  },
+  "activities": [
+    {
+      "day": "12",
+      "month": "SEP",
+      "title": "Vigilia de oración",
+      "description": "Transmisión especial en vivo desde el templo principal.",
+      "tag": "En vivo",
+      "date": "2026-09-12"
+    },
+    {
+      "day": "20",
+      "month": "SEP",
+      "title": "Culto Sector # 2 Sede Buenos Aires",
+      "description": "Evangelismo en el barrio y culto en la noche.",
+      "tag": "Presencial",
+      "date": "2026-09-20"
+    },
+    {
+      "day": "04",
+      "month": "OCT",
+      "title": "Campaña evangelística",
+      "description": "Tres noches de prédica al aire libre.",
+      "tag": "En vivo",
+      "date": "2026-10-04"
+    }
+  ],
+  "verses": [
+    {
+      "text": "Todo lo puedo en Cristo que me fortalece.",
+      "ref": "Filipenses 4:13"
+    },
+    {
+      "text": "Esfuérzate y sé valiente; no temas ni desmayes, porque Jehová tu Dios estará contigo.",
+      "ref": "Josué 1:9"
+    },
+    {
+      "text": "El gozo de Jehová es vuestra fuerza.",
+      "ref": "Nehemías 8:10"
+    },
+    {
+      "text": "Porque yo sé los pensamientos que tengo acerca de vosotros, dice Jehová, pensamientos de paz y no de mal, para daros el fin que esperáis.",
+      "ref": "Jeremías 29:11"
+    },
+    {
+      "text": "Cantad a Jehová cántico nuevo; cantad a Jehová, toda la tierra.",
+      "ref": "Salmos 96:1"
+    },
+    {
+      "text": "No temas, porque yo estoy contigo; no desmayes, porque yo soy tu Dios que te esfuerzo.",
+      "ref": "Isaías 41:10"
+    },
+    {
+      "text": "Jehová es mi pastor; nada me faltará.",
+      "ref": "Salmos 23:1"
+    },
+    {
+      "text": "Alabaré a Jehová con todo mi corazón; contaré todas tus maravillas.",
+      "ref": "Salmos 9:1"
+    },
+    {
+      "text": "Encomienda a Jehová tu camino, y confía en él; y él hará.",
+      "ref": "Salmos 37:5"
+    },
+    {
+      "text": "Los que esperan a Jehová tendrán nuevas fuerzas; levantarán alas como las águilas.",
+      "ref": "Isaías 40:31"
+    },
+    {
+      "text": "Bendice, alma mía, a Jehová, y bendiga todo mi ser su santo nombre.",
+      "ref": "Salmos 103:1"
+    },
+    {
+      "text": "Porque de tal manera amó Dios al mundo, que ha dado a su Hijo unigénito.",
+      "ref": "Juan 3:16"
+    },
+    {
+      "text": "No os afanéis por nada; más bien, en toda ocasión, con oración y ruego, presentad vuestras peticiones a Dios.",
+      "ref": "Filipenses 4:6"
+    },
+    {
+      "text": "Jehová peleará por vosotros, y vosotros estaréis tranquilos.",
+      "ref": "Éxodo 14:14"
+    },
+    {
+      "text": "Engrandeced a Jehová conmigo, y exaltemos a una su nombre.",
+      "ref": "Salmos 34:3"
+    },
+    {
+      "text": "El Señor es fiel, que os afirmará y guardará del mal.",
+      "ref": "2 Tesalonicenses 3:3"
+    },
+    {
+      "text": "En paz me acostaré, y asimismo dormiré; porque solo tú, Jehová, me haces vivir confiado.",
+      "ref": "Salmos 4:8"
+    },
+    {
+      "text": "Dad gracias a Jehová, porque él es bueno; porque para siempre es su misericordia.",
+      "ref": "Salmos 107:1"
+    }
+  ]
+}
