@@ -18,7 +18,7 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Ondas del Orteguaza — La radio que bendice tu vida">
 <meta name="twitter:description" content="Predicaciones, alabanza y compañía en vivo desde Florencia, Caquetá.">
 <meta name="twitter:image" content="https://ondas-del-orteguaza.netlify.app/og-image.png">
@@ -31,6 +31,7 @@
 <meta name="apple-mobile-web-app-title" content="Ondas del Orteguaza">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,500&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
@@ -387,7 +388,7 @@
     font-size:0.95rem; font-weight:500;
   }
   .ios-steps{margin:0 0 0 20px; display:flex; flex-direction:column; gap:8px; font-size:0.98rem; max-width:38ch;}
-  .ios-steps[hidden], .store-btn[hidden], .app-cta[hidden]{display:none;}
+  .ios-steps[hidden], .store-btn[hidden], .app-cta[hidden], .prayer[hidden], .fab-container[hidden], .fab-option[hidden]{display:none;}
   .app-phone{
     justify-self:center;
     width:180px; height:340px;
@@ -689,7 +690,7 @@ body.app-shell-mode .fab-container{ bottom:calc(58px + env(safe-area-inset-botto
     </div>
   </nav>
 
-  <div class="hero-body" id="main-start">
+  <div class="hero-body" id="main-start" tabindex="-1">
     <div>
       <div class="hero-eyebrow">Radio cristiana · Florencia, Caquetá</div>
       <h1>Ondas del Orteguaza. La radio que bendice tu vida.</h1>
@@ -705,7 +706,7 @@ body.app-shell-mode .fab-container{ bottom:calc(58px + env(safe-area-inset-botto
           <svg id="iconPlay" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
           <svg id="iconPause" viewBox="0 0 24 24" style="display:none" aria-hidden="true"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
         </button>
-        <div class="volume-row">
+        <div class="volume-row" id="volumeRow">
           <label for="vol">Volumen</label>
           <input type="range" id="vol" min="0" max="1" step="0.05" value="0.9">
         </div>
@@ -844,8 +845,8 @@ body.app-shell-mode .fab-container{ bottom:calc(58px + env(safe-area-inset-botto
 
 <div class="mini-player" id="miniPlayer">
   <button class="mini-play" id="miniPlayBtn" type="button" aria-label="Reproducir">
-    <svg id="miniIconPlay" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-    <svg id="miniIconPause" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="display:none"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+    <svg id="miniIconPlay" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+    <svg id="miniIconPause" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="display:none" aria-hidden="true"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
   </button>
   <div class="mini-info">
     <span class="mini-dot" aria-hidden="true"></span>
@@ -1002,21 +1003,83 @@ body.app-shell-mode .fab-container{ bottom:calc(58px + env(safe-area-inset-botto
     setUiPlaying(Boolean(playing));
   };
 
+  // ---------- Reconexión automática (solo navegador) ----------
+  // En datos móviles la señal se corta a menudo: si el oyente quería escuchar,
+  // reintentamos solos unas veces antes de rendirnos.
+  const RETRY_DELAYS_MS = [2000, 4000, 8000, 16000];
+  const STALL_TIMEOUT_MS = 15000;
+  let wantsToPlay = false;
+  let retryCount = 0;
+  let retryTimer = null;
+  let stallTimer = null;
+  let playAttempt = 0;
+
+  function clearStreamTimers() {
+    clearTimeout(retryTimer);
+    clearTimeout(stallTimer);
+    retryTimer = null;
+    stallTimer = null;
+  }
+
+  function startStallWatchdog() {
+    clearTimeout(stallTimer);
+    stallTimer = setTimeout(() => handleStreamFailure(), STALL_TIMEOUT_MS);
+  }
+
+  function handleStreamFailure() {
+    if (!wantsToPlay || retryTimer) return;
+    clearTimeout(stallTimer);
+    stallTimer = null;
+    audio.pause();
+    if (!navigator.onLine) {
+      // Se reintenta en el evento 'online'
+      setUiError('Sin conexión — volveremos a sonar al recuperar internet');
+      return;
+    }
+    if (retryCount >= RETRY_DELAYS_MS.length) {
+      wantsToPlay = false;
+      setUiError('No se pudo conectar al stream. Intenta de nuevo.');
+      return;
+    }
+    const delay = RETRY_DELAYS_MS[retryCount++];
+    setUiError('Se cortó la señal. Reconectando…');
+    retryTimer = setTimeout(() => {
+      retryTimer = null;
+      playBrowserStream();
+    }, delay);
+  }
+
   async function playBrowserStream() {
+    wantsToPlay = true;
+    clearStreamTimers();
+    const attempt = ++playAttempt;
     setUiConnecting();
+    startStallWatchdog();
     try {
       // Recarga la fuente en cada play: en radio en vivo, reanudar desde el
       // búfer dejaría al oyente minutos atrasado (y también limpia errores)
       audio.load();
       await audio.play();
     } catch (err) {
-      const offline = !navigator.onLine;
-      setUiError(
-        offline
-          ? 'Sin conexión — no se puede reproducir'
-          : 'No se pudo conectar al stream. Intenta de nuevo.'
-      );
+      // Un intento más nuevo ya reemplazó a este (load() aborta el play anterior)
+      if (attempt !== playAttempt) return;
+      if (err && err.name === 'NotAllowedError') {
+        // El navegador exige un toque del oyente: reintentar solo no serviría
+        wantsToPlay = false;
+        clearStreamTimers();
+        setUiError('Toca reproducir para escuchar la radio');
+        return;
+      }
+      handleStreamFailure();
     }
+  }
+
+  function stopBrowserStream() {
+    wantsToPlay = false;
+    retryCount = 0;
+    clearStreamTimers();
+    audio.pause();
+    setUiPlaying(false);
   }
 
   btn.addEventListener('click', () => {
@@ -1031,25 +1094,46 @@ body.app-shell-mode .fab-container{ bottom:calc(58px + env(safe-area-inset-botto
     }
 
     if (audio.paused) {
+      retryCount = 0;
       playBrowserStream();
     } else {
-      audio.pause();
-      setUiPlaying(false);
+      stopBrowserStream();
     }
   });
 
   audio.addEventListener('waiting', () => {
-    if (!audio.paused) setUiConnecting();
+    if (!audio.paused) {
+      setUiConnecting();
+      startStallWatchdog();
+    }
   });
-  audio.addEventListener('playing', () => setUiPlaying(true));
+  audio.addEventListener('playing', () => {
+    retryCount = 0;
+    clearStreamTimers();
+    setUiPlaying(true);
+  });
   audio.addEventListener('pause', () => {
-    if (!isConnecting) setUiPlaying(false);
+    // Pausas propias (conectando o esperando un reintento) no cuentan;
+    // cualquier otra (una llamada, los controles del sistema) detiene la radio
+    if (isConnecting || isError) return;
+    wantsToPlay = false;
+    clearStreamTimers();
+    setUiPlaying(false);
   });
-  audio.addEventListener('error', () => {
-    setUiError('Error de stream — revisa tu conexión e intenta de nuevo');
-  });
+  // Los fallos de la URL llegan al <source>; los cortes a mitad de emisión, al <audio>
+  audio.addEventListener('error', handleStreamFailure);
+  audio.querySelector('source').addEventListener('error', handleStreamFailure);
   audio.addEventListener('stalled', () => {
-    if (!audio.paused) setUiConnecting();
+    if (!audio.paused) {
+      setUiConnecting();
+      startStallWatchdog();
+    }
+  });
+  window.addEventListener('online', () => {
+    if (wantsToPlay && audio.paused && !retryTimer && !isAndroidApp()) {
+      retryCount = 0;
+      playBrowserStream();
+    }
   });
 
   // El botón del mini-reproductor simplemente activa el botón principal,
@@ -1088,6 +1172,7 @@ body.app-shell-mode .fab-container{ bottom:calc(58px + env(safe-area-inset-botto
           setUiConnecting();
           AndroidRadio.play();
         } else {
+          retryCount = 0;
           playBrowserStream();
         }
       });
@@ -1095,16 +1180,14 @@ body.app-shell-mode .fab-container{ bottom:calc(58px + env(safe-area-inset-botto
         if (isAndroidApp()) {
           AndroidRadio.pause();
         } else {
-          audio.pause();
-          setUiPlaying(false);
+          stopBrowserStream();
         }
       });
       navigator.mediaSession.setActionHandler('stop', () => {
         if (isAndroidApp()) {
           AndroidRadio.pause();
         } else {
-          audio.pause();
-          setUiPlaying(false);
+          stopBrowserStream();
         }
       });
     } catch (_) { /* handlers no soportados */ }
@@ -1125,9 +1208,25 @@ body.app-shell-mode .fab-container{ bottom:calc(58px + env(safe-area-inset-botto
       .replace(/"/g, '&quot;');
   }
 
+  /** Día de la semana (0 = domingo) y minutos desde medianoche en Colombia, sin importar la zona horaria del celular */
+  function nowInBogota() {
+    try {
+      const parts = new Intl.DateTimeFormat('en-US', {
+        timeZone: 'America/Bogota', weekday: 'short', hour: '2-digit', minute: '2-digit', hourCycle: 'h23'
+      }).formatToParts(new Date());
+      const get = (type) => parts.find((p) => p.type === type).value;
+      const day = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].indexOf(get('weekday'));
+      if (day === -1) throw new Error('weekday');
+      return { day, minutes: (Number(get('hour')) % 24) * 60 + Number(get('minute')) };
+    } catch (_) {
+      const d = new Date();
+      return { day: d.getDay(), minutes: d.getHours() * 60 + d.getMinutes() };
+    }
+  }
+
   function todayDayName() {
     const names = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
-    return names[new Date().getDay()];
+    return names[nowInBogota().day];
   }
 
   /** Convierte "5:30 a.m." / "12:00 p.m." a minutos desde medianoche */
@@ -1150,8 +1249,7 @@ body.app-shell-mode .fab-container{ bottom:calc(58px + env(safe-area-inset-botto
     const slots = schedule[todayDayName()] || [];
     if (!slots.length) return null;
 
-    const now = new Date();
-    const nowMinutes = now.getHours() * 60 + now.getMinutes();
+    const nowMinutes = nowInBogota().minutes;
 
     const parsed = slots.map((slot, index) => ({
       index,
@@ -1292,11 +1390,20 @@ body.app-shell-mode .fab-container{ bottom:calc(58px + env(safe-area-inset-botto
       source.src = streamUrl;
     }
 
+    // Las redes sin enlace en content.json se ocultan (y el botón flotante, si no queda ninguna)
     const social = config.social || {};
+    let anySocial = false;
     document.querySelectorAll('[data-social]').forEach((link) => {
       const url = socialUrl(link.dataset.social, social[link.dataset.social]);
-      if (url) link.href = url;
+      if (url) {
+        link.href = url;
+        anySocial = true;
+      }
+      const item = link.closest('li') || link;
+      item.hidden = !url;
     });
+    const fabContainer = document.querySelector('.fab-container');
+    if (fabContainer) fabContainer.hidden = !anySocial;
   }
 
   async function loadContent() {
@@ -1556,6 +1663,18 @@ body.app-shell-mode .fab-container{ bottom:calc(58px + env(safe-area-inset-botto
     storeBtn.hidden = true;
     iosSteps.hidden = false;
     if (appCtaText) appCtaText.textContent = 'En iPhone no necesitas App Store: instálala gratis desde Safari en tres pasos.';
+  }
+
+  // iOS no deja cambiar el volumen desde una web: se usan los botones del teléfono
+  const volumeRow = document.getElementById('volumeRow');
+  if (isIos && volumeRow) volumeRow.hidden = true;
+
+  // La app Android no incluye el formulario de oración (así lo declara la política de privacidad)
+  if (isAndroidApp()) {
+    const prayerSection = document.getElementById('oracion');
+    const navPrayerLink = document.querySelector('.nav-panel-list a[href="#oracion"]');
+    if (prayerSection) prayerSection.hidden = true;
+    if (navPrayerLink) navPrayerLink.parentElement.hidden = true;
   }
 
   // ---------- Service worker (abrir sin conexión) ----------
