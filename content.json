@@ -135,32 +135,7 @@
       }
     ]
   },
-  "activities": [
-    {
-      "day": "12",
-      "month": "SEP",
-      "title": "Vigilia de oración",
-      "description": "Transmisión especial en vivo desde el templo principal.",
-      "tag": "En vivo",
-      "date": "2026-09-12"
-    },
-    {
-      "day": "20",
-      "month": "SEP",
-      "title": "Culto Sector # 2 Sede Buenos Aires",
-      "description": "Evangelismo en el barrio y culto en la noche.",
-      "tag": "Presencial",
-      "date": "2026-09-20"
-    },
-    {
-      "day": "04",
-      "month": "OCT",
-      "title": "Campaña evangelística",
-      "description": "Tres noches de prédica al aire libre.",
-      "tag": "En vivo",
-      "date": "2026-10-04"
-    }
-  ],
+  "activities": [],
   "verses": [
     {
       "text": "Todo lo puedo en Cristo que me fortalece.",
