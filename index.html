@@ -298,6 +298,9 @@
   .event-date .mon{font-size:0.8rem; color:var(--river); font-weight:600;}
   .event-info h3{font-size:1.15rem; margin-bottom:4px;}
   .event-info p{font-size:0.9rem; color:var(--muted);}
+  .event-row:has(.event-poster){align-items:start;}
+  .event-poster{display:block; margin-top:12px; width:min(240px, 100%);}
+  .event-poster img{width:100%; height:auto; border-radius:6px; box-shadow:0 4px 14px rgba(11,42,91,0.18);}
   .event-tag{
     font-size:0.78rem; padding:6px 14px; border:1px solid var(--river); color:var(--river);
     border-radius:100px; white-space:nowrap; height:fit-content;
@@ -600,7 +603,7 @@
       animation:pulse 1.8s infinite ease-in-out; flex-shrink:0;
     }
     .event-row{grid-template-columns:70px 1fr; row-gap:8px;}
-    .event-tag{grid-column:2;}
+    .event-tag{grid-column:2; justify-self:start;}
     .prayer-layout{grid-template-columns:1fr; gap:28px;}
   }
 
@@ -1322,6 +1325,26 @@ body.app-shell-mode .fab-container{ bottom:calc(58px + env(safe-area-inset-botto
     }
   }
 
+  /** Afiche opcional de la actividad: ruta del sitio (ej. "eventos/afiche.jpg") o enlace https:// */
+  function safeImageUrl(value) {
+    const raw = String(value || '').trim();
+    if (!raw) return '';
+    try {
+      const url = new URL(raw, window.location.href);
+      return url.protocol === 'https:' || url.origin === window.location.origin ? url.href : '';
+    } catch (_) {
+      return '';
+    }
+  }
+
+  function posterHtml(event) {
+    const src = safeImageUrl(event.image);
+    if (!src) return '';
+    return `<a class="event-poster" href="${escapeHtml(src)}" target="_blank" rel="noopener" aria-label="Ver afiche de ${escapeHtml(event.title)}">
+            <img src="${escapeHtml(src)}" alt="Afiche: ${escapeHtml(event.title)}" width="1080" height="1440" loading="lazy" decoding="async">
+          </a>`;
+  }
+
   function renderActivities(allActivities) {
     const list = document.getElementById('eventsList');
     if (!list) return;
@@ -1346,6 +1369,7 @@ body.app-shell-mode .fab-container{ bottom:calc(58px + env(safe-area-inset-botto
         <div class="event-info">
           <h3>${escapeHtml(event.title)}</h3>
           <p>${escapeHtml(event.description)}</p>
+          ${posterHtml(event)}
         </div>
         <div class="event-tag">${escapeHtml(event.tag)}</div>
       </div>
