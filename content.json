@@ -137,13 +137,13 @@
   },
   "activities": [
     {
-      "day": "23",
-      "month": "OCT",
-      "title": "Vigilia Zona # 5",
-      "description": "Vigilia de oración desde Jurazzic Park a las 7:00 p.m.",
-      "tag": "En vivo",
-      "date": "2026-10-23",
-      "image": "eventos/vigilia-zona-5.jpg"
+      "day": "26",
+      "month": "NOV",
+      "title": "Campaña Misionera Florencia",
+      "description": "Con el Rev. Clemente Vergara, oficial internacional. Del 26 al 28 de noviembre en la Iglesia Central de Florencia, Caquetá.",
+      "tag": "Presencial",
+      "date": "2026-11-28",
+      "image": "eventos/campana-misionera-florencia.jpg"
     }
   ],
   "verses": [
