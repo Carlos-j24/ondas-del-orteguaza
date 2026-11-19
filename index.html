@@ -657,6 +657,33 @@ body.app-shell-mode footer .brand{ font-size:1.4rem; }
 body.app-shell-mode .affiliation{ align-items:flex-start; }
 body.app-shell-mode .social{ flex-direction:column; gap:14px; }
 
+/* Ventana de la actividad destacada (solo en la app instalada) */
+.featured-overlay{
+  position:fixed; inset:0; z-index:400;
+  background:rgba(7,27,61,0.97);
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  padding:calc(64px + env(safe-area-inset-top,0px)) 24px calc(32px + env(safe-area-inset-bottom,0px));
+  opacity:0; transition:opacity .25s ease;
+  text-align:center; color:var(--cream);
+}
+.featured-overlay.is-visible{opacity:1;}
+.featured-eyebrow{color:var(--gold); font-weight:700; font-size:0.8rem; letter-spacing:0.12em; margin-bottom:12px;}
+.featured-poster{border:0; padding:0; background:none; cursor:pointer; display:block;}
+.featured-poster img{
+  display:block; max-width:min(86vw, 520px); max-height:58vh; width:auto; height:auto;
+  border-radius:12px; box-shadow:0 12px 32px rgba(0,0,0,0.45);
+}
+.featured-progress{width:200px; height:4px; margin-top:16px; background:var(--gold); transform-origin:left center;}
+.featured-overlay.is-visible .featured-progress{animation:featuredCountdown 5s linear forwards;}
+@keyframes featuredCountdown{from{transform:scaleX(1);} to{transform:scaleX(0);}}
+.featured-title{font-family:'Work Sans',sans-serif; font-size:1.15rem; font-weight:700; margin-top:12px;}
+.featured-hint{font-size:0.85rem; color:rgba(245,247,250,0.65); margin-top:2px;}
+.featured-skip{
+  position:absolute; top:calc(12px + env(safe-area-inset-top,0px)); right:16px;
+  border:0; border-radius:20px; padding:8px 16px;
+  background:#12336B; color:var(--cream); font:inherit; font-weight:700; font-size:0.9rem; cursor:pointer;
+}
+
 body.app-shell-mode .mini-player{ bottom:calc(58px + env(safe-area-inset-bottom,0px)); }
 body.app-shell-mode .fab-container{ bottom:calc(58px + env(safe-area-inset-bottom,0px) + 16px); }
 </style>
@@ -1439,6 +1466,7 @@ body.app-shell-mode .fab-container{ bottom:calc(58px + env(safe-area-inset-botto
       renderSchedule(data.schedule);
       renderActivities(data.activities);
       renderVerse(data.verses);
+      maybeShowFeatured(data.activities);
     } catch (err) {
       const scheduleGrid = document.getElementById('scheduleGrid');
       const eventsList = document.getElementById('eventsList');
@@ -1768,6 +1796,98 @@ body.app-shell-mode .fab-container{ bottom:calc(58px + env(safe-area-inset-botto
 
   if (isStandalonePwa()) {
     initAppShell();
+  }
+
+  // ---------- Ventana de la actividad destacada (al abrir la app instalada) ----------
+  // Si content.json marca una actividad con "popup": true (que no haya pasado y tenga afiche),
+  // la mostramos 5 segundos al abrir la app y luego queda la emisora.
+  const FEATURED_DURATION_MS = 5000;
+  const FEATURED_IMAGE_TIMEOUT_MS = 3000;
+  const FEATURED_MAX_DELAY_AFTER_LAUNCH_MS = 12000;
+  const featuredLaunchAt = Date.now();
+
+  function featuredActivity(activities) {
+    const today = todayIsoBogota();
+    return (activities || []).find((event) =>
+      event.popup === true &&
+      safeImageUrl(event.image) &&
+      (!/^\d{4}-\d{2}-\d{2}$/.test(event.date || '') || event.date >= today)
+    ) || null;
+  }
+
+  function featuredAlreadyShown() {
+    try { return sessionStorage.getItem('ondas-featured-shown') === '1'; } catch (_) { return false; }
+  }
+
+  function markFeaturedShown() {
+    try { sessionStorage.setItem('ondas-featured-shown', '1'); } catch (_) { /* sin almacenamiento */ }
+  }
+
+  function maybeShowFeatured(activities) {
+    if (!document.body.classList.contains('app-shell-mode') || featuredAlreadyShown()) return;
+    if (Date.now() - featuredLaunchAt > FEATURED_MAX_DELAY_AFTER_LAUNCH_MS) return;
+    const event = featuredActivity(activities);
+    if (!event) return;
+    markFeaturedShown();
+
+    // Esperamos a que el afiche cargue; si tarda mucho, no hacemos esperar a nadie
+    const img = new Image();
+    let timedOut = false;
+    const timeout = setTimeout(() => { timedOut = true; }, FEATURED_IMAGE_TIMEOUT_MS);
+    img.onload = () => {
+      clearTimeout(timeout);
+      if (!timedOut) showFeatured(event, img.src);
+    };
+    img.onerror = () => clearTimeout(timeout);
+    img.src = safeImageUrl(event.image);
+  }
+
+  function showFeatured(event, src) {
+    const overlay = document.createElement('div');
+    overlay.className = 'featured-overlay';
+    overlay.setAttribute('role', 'dialog');
+    overlay.setAttribute('aria-modal', 'true');
+    overlay.setAttribute('aria-label', 'Próxima actividad: ' + event.title);
+    overlay.innerHTML = `
+      <button type="button" class="featured-skip">Saltar ✕</button>
+      <div class="featured-eyebrow">PRÓXIMA ACTIVIDAD</div>
+      <button type="button" class="featured-poster" aria-label="Ver detalles de ${escapeHtml(event.title)}">
+        <img src="${escapeHtml(src)}" alt="Afiche: ${escapeHtml(event.title)}">
+      </button>
+      <div class="featured-progress" aria-hidden="true"></div>
+      <div class="featured-title">${escapeHtml(event.title)}</div>
+      <div class="featured-hint">Toca el afiche para ver los detalles</div>
+    `;
+
+    let closed = false;
+    const timer = setTimeout(close, FEATURED_DURATION_MS);
+    function close() {
+      if (closed) return;
+      closed = true;
+      clearTimeout(timer);
+      document.removeEventListener('keydown', onKey);
+      overlay.classList.remove('is-visible');
+      setTimeout(() => overlay.remove(), 260);
+    }
+    function onKey(e) {
+      if (e.key === 'Escape') close();
+    }
+
+    overlay.addEventListener('click', (e) => {
+      if (e.target.closest('.featured-poster')) {
+        // Tocar el afiche lleva a la pestaña Actividades con todos los detalles
+        const tab = document.querySelector('.shell-tab[data-tab="actividades"]');
+        if (tab) tab.click();
+      }
+      close(); // tocar el afiche, "Saltar" o el fondo cierra la ventana
+    });
+    document.addEventListener('keydown', onKey);
+
+    document.body.appendChild(overlay);
+    void overlay.offsetWidth; // fuerza el primer pintado para que la entrada se anime
+    overlay.classList.add('is-visible');
+    const skip = overlay.querySelector('.featured-skip');
+    if (skip) skip.focus({ preventScroll: true });
   }
 })();
 </script>
